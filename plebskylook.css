@@ -1,0 +1,76 @@
+body{
+    background-color: #2d2e34;
+    padding: 2vh 10vw;
+}
+
+h1{
+    color: #fff;
+    font-family: Consolas, serif;
+    text-align: center;
+}
+
+h2{
+    color: #fff;
+    font-family: Consolas, serif;
+}
+
+h3{
+    color: #fff;
+    font-family: Consolas, serif;
+    padding-left: 2vw;
+}
+
+h4{
+    color: #fff;
+    font-family: Consolas, serif;
+    padding-left: 2vw;
+}
+
+
+
+p{
+    color: #fff;
+    font-family: "Consolas", serif;
+    padding-left: 4vw;
+    padding-right: 8vw;
+}
+
+pre{
+    padding-left: 4vw;
+    padding-right: 8vw;
+}
+
+li{
+    color: #fff;
+    font-family: Consolas, serif;
+}
+
+ul{
+    margin-left: 4vw;
+}
+
+br{
+    margin-top: 5vh;
+}
+
+table, th, td{
+    color: white;
+    margin-left: 4vw;
+    border: 1px solid #aaa;
+}
+
+tr, th, td{
+    padding: 10px;
+}
+
+a{
+    color: white;
+}
+
+i{
+    color: #aaaaaa;
+}
+
+b{
+    color: #aaaaaa;
+}
