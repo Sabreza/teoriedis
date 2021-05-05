@@ -6,103 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="plebskylook.css">
-    <title>Teorie databázových systémů - Pavézovy dobroty</title>
+    <title>Magické příkazy pana Černého</title>
 </head>
 <body>
-    <h1>Teorie do informačních systému</h1>
-    <p>Hromadné zpracování dat – automatizovaný systém, který nám umožní zpracování velkého množství dat a údajů.</p>
-    <br>
-<p><b>Hromadné zpracování dat nám umožňuje:</b></p>
-<p>- údržba dat,</p>
-<p>- vhodně zaznamenávat,</p>
-<p>- umožní změnu a smazání,</p>
-<p>- umožní nám vyhledávat,</p>
-<p>- třízení podle různých kritérií,</p>
-<p>- odvozování dalších údajů,</p>
-<p>- zaznamenávání vztahů mezi objekty,</p>
-<p>- vhodná grafická reprezentace údajů.</p>
-
-<br>
-
-<p><b>Problémy při hromadném zpracování dat:</b></p>
-<p>- Redundance: Opakování, opakování, opakování..,</p>
-<p>- nekonzistence: Chyba v databázi, data nejsou správně,</p>
-<p>- špatná integrita: Data v datbázi neodpovídají outputu,</p>
-<p>- obtížná dosažitelnost dat: <i>Název je zároveň definicí</i>,</p>
-<p>- izolovanost: Data nemusí být provázána s ostatními,</p>
-<p>- neparalelní přístup uživatelů: K datům se nemusí dostat více uživatelů naráz,</p>
-<p>- zabezpečení dat: K datům se nesmí dostat neautorizovaní lidé.</p>
-
-<br>
-
-<h2>Slovíčkaření</h2>
-<img src="opraski/databaze_diagram.png" width="600px">
-<p><b>SŘBD</b> - systém řízení báze dat - database management system</p>
-
-<br>
-
-<h2>Schémata databází</h2>
-<p>- Externí schéma - dělí se na pohledy, ve kterých jsou tabulky</p>
-<p>- Konceptuální schéma - skládá se z tabulek, ve kterých jsou data</p>
-<p>- Interní schéma - Jsou tam data + důležité low level data (ne kapitán Data ze Star Treku, haha, jsem vtipný)</p>
-<img src="opraski/schemata.png" width="600px">
-<br>
-<br>
-
-<h1>Životní cykly a modely</h1>
-<p>Jsou dva druhy životních cyklů:</p>
-<p>Tradiční - Méně flexibilní, stanovený plánovaný postup</p>
-<p>Agilní - Více flexibilní, spíše adaptilní postup</p>
-<br>
-<p>Struktura všech životních cyklů je následující:</p>
-<p>Požadavky --> Analýza a návrh systému --> Implementace --> Testování --> Provoz + údržba</p>
-
-<h2>Modely životních cyklů</h2>
-<h3>Vodopád</h3>
-<p>- Model je založený na fázích, které přecházejí pouze, je-li předchozí dokončená</p>
-<img src="opraski/vodopady.png" width="600px">
-<p><b>Výhody:</b></p>
-<p>- Jasně rozdělené fáze, které, pokud se dodrží, umožňují efektivní vývoj</p>
-<p>- Možnost dobrého rozdělení činností mezi lidi</p>
-<p><b>Nevýhody:</b></p>
-<p>- Při špatné komunikaci s klientem může být vývoj neefektivní</p>
-<p>- Problémové hledání chyb</p>
-<p>- Fáze se mohou špatně dodržovat</p>
-
-<br>
-<h3>Průzkumný vývoj (exploratory development)</h3>
-<p></p>
-<img src="opraski/exploratory.png" width="600px">
-<p><b>Výhody:</b></p>
-<p>- Rychlý vývoj - vysoká šance na povedení</p>
-<p>- Není nutnost vytvářet dokumentaci</p>
-<p><b>Nevýhody:</b></p>
-<p>- Není kvalitní dokumentace</p>
-<p>- Vhodný pouze pro menší týmy</p>
-<p>- Špatné sledování jednotlivých částí vývoje</p>
-
-<br>
-<h3>Prototyp (throw away protyping)</h3>
-<p>- Metoda je založená na komunikaci s klientem</p>
-<p>- Funguje tak, že se vytvoří rychlý návrh programu, který je vyhodnocen klientem. Pokud se mu to nelíbí, tak se vytvoří nový návrh</p>
-<img src="opraski/prototyp.png" width="600px">
-<p><b>Výhody:</b></p>
-<p>- Dobrá komunikace s klientem</p>
-<p>- Rychlé programování, je-li hodnocení klienta dobré</p>
-<p>- </p>
-
-<br>
-<h3>UP a RUP</h3>
-<p><b>Unified Process</b> a <b>Rational Unified Process</b></p>
-<p>- Metody fungují postupným navazováním jednotlivých částí vývoje na sobě</p>
-<p>- Od vodopádu se liší tím, že fáze na sebe navazují mnohem plynuleji</p>
-<img src="opraski/rup.png" width="600px">
-<h4>Rozdíl mezi UP a RUP</h4>
-<p>- V zásadě jsou to stejné modely, pouze RUP je vyvinutý IBM.</p>
-<p><b>Výhody:</b></p>
-<p>- </p>
-<p><b>Nevýhody:</b></p>
-<p>- Nejsou vhodné pro malé projekty</p>
-
+  <h1>LINUX</h1>
+  <h2>Příkazy</h2>
+  <p><i>Tyto příkazy platí pro Ubuntu a asi Debian. No Gentoo here.</i></p>
+  <br>
+  <h3>Práce se systémem</h3>
+  <p>cd [název složky] - přesune uživatele do určité složky</p>
+  <p>cd .. - přesune uživatele o složku zpět</p>
+  <p>dir - zobrazí složky</p>
+  <p>(sudo) nano [jméno souboru.přípona] - otevře textový editor</p>
+  <p>(sudo) vim [jméno souboru.přípona] - otevře jiný textový editor]</p>
+  <p>(sudo) mkdir [název] - vytvoří složku</p>
+  <p>(sudo) touch [název(.přípona)] - vytvoří složku</p>
+  <p>(sudo) rmdir [název] - smaže složku</p>
+  <p>(sudo) rm [název(.přípona)] - smaže soubor</p>
+  <p>(sudo) mv [adresa souboru/složky] [cílová adresa] - přesune soubor</p>
+  <p>cp [adresa souboru/složky] [cílová složka] - zkopíruje složku</p>
+  
+  <br>
+  
+  <h3>Práce se softwarem</h3>
+  <p>sudo apt install [jméno programu] - instaluje program</p>
+  <p>sudo apt remove [jméno programu] - maže program</p>
+  <p>apt search [jméno programu] - hledá programy v repozitáři</p>
+  <br>
+  <p>Lze aplikovat i na několik programů najednou:</p>
+  <p>sudo apt install [jméno 1], [jméno 2], [jméno 3]</p>
+  <br>
+  <h3>Užitečné programy</h3>
+  <p>Midnight Commander - terminálový grafický prohlíeč souborů a složek</p>
+  <p><i>sudo apt install mc</i></p>
+  <p>Apache server</p>
+  <p><i>sudo apt install apache2</i></p>
+  <p>PHP</p>
+  <p><i>sudo apt install php libapache2-mod-php</i></p>
+  <p>Python</p>
+  <p><i>sudo apt install python2</i></p>
+  <p><i>sudo apt install python3</i></p>
+  <h3>Užitečné cesty k souboru</h3>
+  <p></p>
+  
 </body>
 </html>
