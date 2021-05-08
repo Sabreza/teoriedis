@@ -34,7 +34,7 @@
   <p>apt search [jméno programu] - hledá programy v repozitáři</p>
   <br>
   <p>Lze aplikovat i na několik programů najednou:</p>
-  <p>sudo apt install [jméno 1], [jméno 2], [jméno 3]</p>
+  <p>sudo apt install [jméno 1] [jméno 2] [jméno 3]</p>
   <br>
   <h3>Užitečné programy</h3>
   <p>Midnight Commander - terminálový grafický prohlíeč souborů a složek</p>
@@ -46,8 +46,52 @@
   <p>Python</p>
   <p><i>sudo apt install python2</i></p>
   <p><i>sudo apt install python3</i></p>
-  <h3>Užitečné cesty k souboru</h3>
-  <p></p>
+  
+  <h2>Užitečné cesty k souboru</h2>
+  
+  <p><i>sudo nano /etc/netplan/01-netcfg.yaml</i> - Zde lze nastavit IP adresy etc.</p>
+  <h4>Ukázka syntaxe:</h4>
+  <i><p>network:</p>
+  <p>version: 2</p>
+  <p>renderer: networkd</p>
+  <p>ethernets:</p>
+  <p> ens3:</p>
+  <p>  dhcp4: no</p>
+  <p>    addresses:</p>
+  <p>      - 192.168.121.221/24<p>
+  <p>    gateway4: 192.168.121.1</p>
+  <p>    nameservers:</p>
+  <p>        addresses: [8.8.8.8, 1.1.1.1]</p></i>
+  
+  <p><b>Poznámka:</b> Toto se nekopíruje, je to citlivé na pozice jednotlivých charakterů. Prostě to přepišt!<p>
+  <p><b>Poznámka 2:</b> Tento plán nemusí fungovat na 100%, je to hodně individuální.</p>
+  <p><b>Poznámka 3:</b> Pokud je editace souboru hotová, je potřeba spustit tento příkaz: <i>sudo netplan apply</i></p>
+  <br>
+  
+  <p><i>/home/</i> - Zde se nachází uživatelské účty (výjma root uživatele, ale se na Ubuntu řešit moc nemusí)</p> 
+  <br>
+  
+  <p><i>/var/www/</i> - Zde se nachází webové stránky, na které Apache server vidí</p>
+  <br>
+  
+  <h2>Nastavení Apache serveru</h2>
+  <p>Po instalaci a spuštění Apache se může stát, že se úplně nebudou mít rádi s firewallem</p>
+  <p>Pro vyřešení tohoto problému je potřeba zadat několik příkazů</p>
+  <p>1. <i>sudo ufw app list</i> - Vypíše seznat dostupných programů, které komunikují s firewallem</p>
+  <p>V nabídce by se mělo nacházet <i>Apache</i>, <i>Apache Full</1> a <i>Apache Secure</i></p>
+  <p>2. <i>sudo ufw allow 'Apache Full'</i> - Povolí Apache server na všechny porty</p>
+  <p>3. PROFIT</p>
+  <br>
+  <p>Pokud to nebude fungovat, zkusil bych restartovat Apache příkazem <i>sudo systemctl reload apache2</i> nebo <i>sudo systemctl reload apache2</i></p>
+  
+  <h2>Práva souborů</h2>
+  <p>Uživatelé mohou mít nastavené různé práva přístupu k jednotlivým souborům, například se může jednat o jejich spustitelnost</p>
+  <p>Tyto práva se dají řešit přes příkazy, ale jednodušší je je řešit v Midnight Commanderu</p>
+  <p>1. Zapněte Midnight Commander -> <i>(sudo) mc</i></p>
+  <p>2. Najeďte do adresáře kde se nachází vybraný soubor a klikněte na něj</p>
+  <p>3. Najeďte v menu na <i>File</i> a v něm na <i>chmod</i></p>
+  <p>4. Změňte práva vlastníka a potvrďte</p>
+  <p>PROFIT</p>
   
 </body>
 </html>
