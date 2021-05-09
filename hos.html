@@ -104,5 +104,192 @@
   <h3>Piny pro Raspberry Pi 3</h3>
   <img src="opraski/Raspberry-Pi-3-B-Pinout-in-detail.jpg" width="600px">
   
+  <h1>ESP</h1>
+  <h2>Wi-Fi serióvá linka</h2>
+  <p>#include <ESP8266WiFi.h></p>
+  <p>const char* ssid = "Tvé SSID";</p>
+  <p>const char* password="Tvé heslo k WiFi";</p>
+  <p>void setup() {</p>
+  <p>// put your setup code here, to run once:</p>
+  <p>Serial.begin(9600);</p>
+  <p>delay(1000);</p>
+  <p>Serial.println("Program 03Wifi_SeriovaLinka");</p>
+  <p>WiFi.begin(ssid, password);</p>
+  <p>Serial.print("Pripojuji se k "); Serial.print(ssid);</p>
+  <p>while (WiFi.status() != WL_CONNECTED) {</p>
+  <p>delay(1000);</p>
+  <p>Serial.print(".");</p>
+  <p>}</p>
+  <p>Serial.println("\n");</p>
+  <p>Serial.print("IP adresa: "); Serial.println(WiFi.localIP());</p>
+  <p>Serial.print("MAC adresa: "); Serial.println(WiFi.macAddress());</p>
+  <p>}</p>
+    <p>void loop() {</p>
+  <p>// put your main code here, to run repeatedly:</p>
+    <p>}</p>
+  
+<h2>Ovládání LED</h2>
+  <p>  // Tento kod vyuziva zdrojove kody z odkazu:</p>
+<p>// https://randomnerdtutorials.com/esp8266-web-server-with-arduino-ide/</p>
+<p>// I. Globalni sekce</p>
+<p>// Knihovna pro komunikaci s ESP8266 WiFi + obsahuje tcp server viz. class WiFiServer</p> 
+<p>#include <ESP8266WiFi.h></p>
+<p>// Udaje k WiFi</p>
+<p>const char* ssid = "Baron_Sitko24";</p>
+<p>const char* password = "Alfini_283";</p>
+<p>// Vytvoreni objektu tcp server, ktery nasloucha na portu 80</p>
+<p>WiFiServer server(80);</p>
+<p>// Retezce pro www stranku s formularem</p>
+<p>String header = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n";</p>
+<p>String html_1 = "<!DOCTYPE html><html><head><title>Za</title></head><body><div id='main'>";</p>
+<p>String html_2 = "<p style=\"text-align: center\"> <h2>Priklad ovladani spotrebice.</h2> </p>";</p>
+<p>String html_6 = "<h3>Ovladani zarovky</h3>";</p>
+<p>String html_7 = "<form id='F1' action='ZAROVKAON'><input class='button' type='submit' value='Zapni zarovku' ></form><br>";</p>
+<p>String html_8 = "<form id='F2' action='ZAROVKAOFF'><input class='button' type='submit' value='Vypni zarovku' ></form><br>";</p>
+<p>String html_9 = "</div></body></html>";</p>
+<p>// promenna pro cteni pozadavku na web server</p>
+<p>String request = "";</p>
+<p>// Zarovka je pripojena ke GPIO 13</p>
+<p>int Pin_zarovky = 13;</p>
+<p>// II. Setup sekce</p>
+<p>void setup() {</p>
+<p>  // Inicializace serioveho portu - prenosova rychlost 115200 b/s</p>
+<p>  Serial.begin(9600);</p>
+<p>  delay(10);</p>
+<p>  // Pin_zarovky nastavime jako vystupni </p>
+<p>  pinMode(Pin_zarovky, OUTPUT); </p>
+<p>  digitalWrite(Pin_zarovky, 0);   // </p>
+<p>  delay(2000);               // cekej </p>
+<p>  digitalWrite(Pin_zarovky, 1);    //  </p>
+<p>// Pripojeni k WiFi siti a zobrazeni stavu WiFi v seriovem monitoru</p>
+<p>  Serial.println();</p>
+<p>  Serial.print("Connecting to ");</p>
+<p>  Serial.println(ssid);</p>
+<p>  WiFi.begin(ssid, password);</p>
+<p>  while (WiFi.status() != WL_CONNECTED) {</p>
+<p>    delay(500);</p>
+<p>    Serial.print(".");</p>
+<p>  }</p>
+<p>  Serial.println("");</p>
+<p>  Serial.println("WiFi je pripojena");</p>
+<p>  // Spusteni tcp serveru</p>
+<p>  server.begin();</p>
+<p>  delay(5000);</p>
+<p>  Serial.println("Web server je spusten. Cekej nez ESP ziska IP adresu");</p>
+<p>  // Vypise IP addresu a MAC adresu</p>
+<p>  Serial.print("IP address:\t"); Serial.println(WiFi.localIP());</p>
+<p>  Serial.print("MAC adresa:\t"); Serial.println(WiFi.macAddress());</p>
+<p>}</p>
+<p>// III. Sekce nekonecne smycky</p>
+<p>void loop() {</p>
+<p>  // Server nasloucha az se k nemu prihlasi nejaky klient. Typicky je to webovy browser</p>
+<p>  WiFiClient client = server.available();</p>
+<p>  if (!client)  {  return;  }</p>
+<p>  // Cte prvni radek pozadavku (request)</p>
+<p>  request = client.readStringUntil('\r');</p>
+<p>  // </p>
+<p>  Serial.println(request);       </p>
+<p>  // pokud se vrati  </p>
+<p>  if       ( request.indexOf("ZAROVKAON") > 0 )  { digitalWrite(Pin_zarovky, 1); }</p>
+<p>  else if  ( request.indexOf("ZAROVKAOFF") > 0 ) { digitalWrite(Pin_zarovky, 0); }</p>
+<p>  client.flush();</p>
+<p>  client.print( header );</p>
+<p>  client.print( html_1 );</p>
+<p>  client.print( html_2 );</p>
+<p>  client.print( html_6 );</p>
+<p>  client.print( html_7 );</p>
+<p>  client.print( html_8 );</p>
+<p>  client.print( html_9 );</p>
+<p>  delay(5);</p>
+<p>// client.stop();</p>
+<p>// Serial.println("Client disconnected.");</p>
+<p>}</p>
+  
+<h2>BLIK</h2>
+<p>int pin=13; </p>
+<p>void setup() { </p>
+<p>  // Sem vložte programový kód, který se má provést pouze jednou </p>
+<p>  // nastavíme pin GPIO 13 (D7) jako výstupní. </p>
+<p>  pinMode(pin, OUTPUT); </p>
+<p>}  </p>
+<p>void loop() { </p>
+<p>  // loop – sem vložíme kód, který se ve smyčce neustále opakuje </p>
+<p>  digitalWrite(pin, HIGH);   // rozsvit LED (HIGH na pinu bude Ucc) </p>
+<p>  delay(1500);               // wait for a milisecond </p>
+<p>  digitalWrite(pin, LOW);    // zhasni LED (LOW na pinu bude 0V) </p>
+<p>  delay(1000);               // wait for a milisecond </p>
+<p>}</p>
+
+<h2>BLIK2</h2>
+<p><b>Zapisuje se to do seriálového monitoru ON/OFF</b></p>
+<br>
+<p>int pin=13;</p>
+<p>void setup() {</p>
+<p>  // Sem vložte programový kód, který se má provést pouze jednou </p>
+<p>  // nastavíme pin GPIO 13 (D7) jako výstupní. </p>
+<p>  pinMode(pin, OUTPUT); </p>
+<p>  // Inicializace seriove linky</p>
+<p>  Serial.begin(9600);</p>
+<p>  delay(2000);</p>
+<p>  Serial.println("Program Blik02");</p>
+<p>}  </p>
+<p>void loop() {</p> 
+<p>  // loop – sem vložíme kód, který se ve smyčce neustále opakuje </p>
+<p>  digitalWrite(pin, HIGH);   // rozsvit LED (HIGH na pinu bude Ucc) </p>
+<p>  Serial.println("LED ON");</p>
+<p>  delay(1500);               // cekej 500 ms </p>
+<p>  digitalWrite(pin, LOW);    // zhasni LED (LOW na pinu bude 0V) </p>
+<p>  Serial.println("LED OFF");</p>
+<p>  delay(1000);               // cekej 500 ms </p>
+<p>}</p>
+
+<img src="opraski/blik.png" width="600px">
+<p><i>Platí pro BLIK i BLIK2</i></p>
+
+<h3>OneWire</h3>
+<p>int pin=13; </p>
+<p>void setup() { </p>
+<p>  // Sem vložte programový kód, který se má provést pouze jednou </p>
+<p>  // nastavíme pin GPIO 13 (D7) jako výstupní.</p> 
+<p>  pinMode(pin, OUTPUT); </p>
+<p>  // Inicializace seriove linky</p>
+<p>  Serial.begin(9600);</p>
+<p>  delay(2000);</p>
+<p>  Serial.println("Program Blik02");</p>
+<p>}  </p>
+<p>void loop() { </p>
+<p>  // loop – sem vložíme kód, který se ve smyčce neustále opakuje </p>
+<p>  digitalWrite(pin, HIGH);   // rozsvit LED (HIGH na pinu bude Ucc)</p> 
+<p>  Serial.println("LED ON");</p>
+<p>  delay(1500);               // cekej 500 ms </p>
+<p>  digitalWrite(pin, LOW);    // zhasni LED (LOW na pinu bude 0V)</p> 
+<p>  Serial.println("LED OFF");</p>
+<p>  delay(1000);               // cekej 500 ms </p>
+<p>}</p>
+
+<h4>ESP Easy Flasher</h4>
+<p><b>Odkaz na stažení:</b> https://github.com/letscontrolit/ESPEasy/releases/tag/mega-20200608</p>
+<img src="opraski/esp_postup.png">
+<br>
+<p>Připojíme na náš COM</p>
+<p>Firmware bude: ESP_Easy_mega_20200608_normal_ESP8266_4M1M.bin</p>
+<p>Dále klikneme na flash ESP počkáme nějakou dobu a připojíme se na WiFi ESP_Easy</p>
+<p>Do prohlížeče vypíšeme IP adresu kterou nám to dá</p>
+<img src="opraski/esp_program.png" width="600px">
+<p>Následně klikneme na Tools, Advanced a do NTP zadáme: ntp.cesnet.cz</p>
+
+<h4>Připojení LCD a tepelného/tlakového čidla</h4>
+<img src="opraski/teplomer_zapojeni.png" width="600px">
+<p>D2=SDA</p>
+<p>D1=SCL</p>
+<p>Opět se připojíme na svou IP adresu skrze ESP Easy Flasher</p>
+<p>Klikneme na Hardware a tam zkontrolujeme zda jsme SDA/SCL připojili správně</p>
+<p>Klikneme na Tools a vybereme I2C Scan:	0x27 = LCD, MCP, PCF</p>
+<p>						0x76 = BME, BMP, MS, HT</p>
+<p>Dále klikneme na Divices a ADD new device a zvolíme Environment- BMx280 pojmenujeme BMP odfajfkujeme Enabled, I2C address by mělo být 0x76, interval = 5sec., a klikneme submit</p>
+<p>Dále opět přidáme zařízení , ale tentokrát Display – LCD2004, pojmenujeme LCD fajfka Enabled, I2C address 0x27, display site 2x16, </p>
+<p>Line 1: t=[BMP#Temperature]{D}C	toto je pro teplotu</p>
+<p>Line 2: p=[BMP#Pressure] hPA	toto je pro tlakoměr, interval buse opět 5 sekund</p>
+
 </body>
 </html>
