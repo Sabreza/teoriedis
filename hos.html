@@ -290,6 +290,92 @@
 <p>Dále opět přidáme zařízení , ale tentokrát Display – LCD2004, pojmenujeme LCD fajfka Enabled, I2C address 0x27, display site 2x16, </p>
 <p>Line 1: t=[BMP#Temperature]{D}C	toto je pro teplotu</p>
 <p>Line 2: p=[BMP#Pressure] hPA	toto je pro tlakoměr, interval buse opět 5 sekund</p>
+  
+<h1>Obecná část</h1>
+<p>Sběrnice One Wire-----------------------------------------------------------------------------------------------------------</p>
+<br>
+<p>Kolik vodičů je potřeba pro přenos dat po sběrnici One Wire a které to jsou? Jak se označuje?</p>
+<p>jeden datový + napájení, pokud spolu mají komunikovat a nejsou oddělené opticky musí být spojené se zemí</p>
+<p>označuje se DQ (většinou začíná na D)</p>
+<br>
+<p>Vysvětlete princip přenosu dat po sběrnici One Wire</p>
+<p>sériová komunikace asynchronní, typu master-slave, vždy komunikaci musí začít master,</p>
+<p>master odešle původní sekvenci tak aby slave poznal koho oslovuje a nasledně slave podle adresy, kterou master uvedl</p>
+<p>odpovi pomocí odpoví několika bitů</p>
+<br>
+<p>nakreslit standardní připojení one wire</p>
+<p>https://scienceprog.com/understanding-1-wire-interface/</p>
+<br>
+<p>Kolik zařízení může být připojeno k jedné sběrnici One Wire.</p>
+<p>Více zařízení, není to omezeno množstvím, ale kapacitou jako jednotkou, čím vyšší je kapacita,</p>
+<p>tím při vyšší frekvenci dochází k útlumu těch přenášených dat a kvuli tomu by se to nemuselo dostat ke všem zařízením</p>
+<br>
+<p>Jakým způsobem určím, se kterým zařízením na One Wire se bude komunikovat? Uvedte priklad adresy zarizeni</p>
+<p>kdyz se vyrabi one wire zarizeni, tak vzdy od vyroby je do zarizení zakomponovana jeho adresa, </p>
+<p>a také podle prvních dvou hexadecimálních znaků lze poznat o jaký typ zařízení se jedná</p>
+<p>Adresa: 10-25AFCD04050607</p>
+<br>
+<p>Jak se ověří, že data přijatá po 1-wire sběrnici jsou uplná a správná?</p>
+<p>na konci kazde zpravy kterou odesila slave masterovi je tam CRC = kontrolní součet</p>
+<br>
+<p>Sběrnice I2C ---------------------------------------------------------------------------------------------------------------</p>
+<br>
+<p>(Master-slave, každé zařízení musí mít adresa, adresa je jeden byte, z toho jednoho bytu, se ten nejvyšší</p>
+<p>bit se používá na to, že se určuje jestli chce master číst nebo zapisovat a tím pádem zůstava jen 7 bitů = 127 zařízení,</p> 
+<p>synchronní = musí tam být signál CLOCK, standard přenosové rychlosti je 100kHz)</p>
+<br>
+<p>Kolik vodičů je potřeba pro přenos dat po sběrnici I2C a které to jsou?</p>
+<p>2, CLOCK a DATA(obousměrný)</p>
+<br>
+<p>Vysvětlete princip přenosu dat po sběrnici I2C</p>
+<p>podobné jak u One wire, ale je to řízené hodinovym signalem, prenasi se data na hranu hodinoveho signalu</p>
+<br>
+<p>Kolik zařízení může být připojeno k jedné sběrnici I2C v základní nerozšířené verzi?</p>
+<p>127</p>
+<br>
+<p>Jaký význam mají Pull Up rezistory u I2C sběrnice? </p>
+<p>rezistory ktere definuji defaultni uroven v dobe kdy neni nic pripojeneho, pull up = 1, pull down = 0,</p>
+<p>tri stavy logickych obvodu = 1/0/nic(stav vysoke impedance)</p>
+<br>
+<p>Nakreslete zapojení, ve kterém připojíte 5 sériových I2C eeprom paměti 24LC256 k jedné sběrnici</p>
+<br>
+<p>Sběrnice SPI(synchronní komunikace)-------------------------------------------------------------------------------------------</p>
+<br>
+<p>Kolik vodičů je potřeba pro přenos dat po sběrnici SPI a které to jsou?</p>
+<p>6, 2 napajeci, CLOCK, MISO, MOSI, chip select - slouzi k vybirani chipu/cidlo, se kterym chce komunikovat</p>
+<br>
+<p>Vysvětlete princip přenosu dat po sběrnici SPI</p>
+<p>podobne jak u I2C, ale jsou tam 2 vodice misto jednoho pro prenos dat, kazdy z vodicu je vzdy vstupni nebo vystupni, </p>
+<p>tzn. jednosmerne vodice, casto se kvuli tomu tahle sbernice pouziva, sice je tam jeden vodic navic, ale jsou vyrobne jednoducha</p>
+<br>
+<p>Jaka je zakladni prenosova rychlost sbernice SPI v porovnani s sbernici I2C</p>
+<p>Je podstatne vyssi, rychlosti se pohybuji v radech Mb, az 70Mb, u I2C v radech kHz</p>
+<br>
+<p>Jake jsou nevyhody sbernice SPI</p>
+<p>komunikacni vzdalenosti jsou kratsi nez u I2C a je tam neporadek u znaceni slave zarizeni</p>
+<br>
+<h2>IoT<h2>
+<p>Internet of Things, Internet Věcí</p>
+<br>
+<p>Popiste vlastnosti zarizeni IoT</p>
+<p>meli by byt pripojeny k internetu</p>
+<p>mala zarizeni</p>
+<p>prenasi po siti pouze velmi maly objem dat radove desitky bytu</p>
+<p>maji nizkou spotrebu</p>
+<br>
+<p>Platformy pro IOT
+<p>LoRaWAN, sigfox, IQRF - profesionalni platformy; ESP8266</p>
+<br>
+<p>Jake bezdratove frekvence se pouzivaji pro prenos dat pro IoT zarizeni, porovnejte vyhody nevyhody</p>
+<p>2,4GHz;</p>
+<p>866MHz - nejvice pouzivana, nizka spotreba, je regulovana, tzn. je nejmene zarusena (povoleno na teto frekvenci vysilat pouze 1% z doby provozu zarizeni), lze prenaset na velkou vzdalenost(1-2km);</p>
+<p>433MHz;</p>
+<p>cim nizsi je frekvence, tim lepe prochazi prekazkama, proto je 866 lepsi nez 2,4; </p>
+<p>433 je docela zarusena frekvence, proto ji tolik profesionalni platformy nepouzivaji</p>
+<br>
+<p>Co je to MQTT?</p>
+<p>komunikacni standard pro prenos zprav mezi IoT zarizenimi</p>
+<p>nejznamejsi MQTT broker - MOSQUITTO</p>
 
 </body>
 </html>
