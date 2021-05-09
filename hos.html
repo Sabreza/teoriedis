@@ -140,13 +140,13 @@
 <p>// Vytvoreni objektu tcp server, ktery nasloucha na portu 80</p>
 <p>WiFiServer server(80);</p>
 <p>// Retezce pro www stranku s formularem</p>
-<p>String header = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n";</p>
-<p>String html_1 = "<!DOCTYPE html><html><head><title>Za</title></head><body><div id='main'>";</p>
-<p>String html_2 = "<p style=\"text-align: center\"> <h2>Priklad ovladani spotrebice.</h2> </p>";</p>
-<p>String html_6 = "<h3>Ovladani zarovky</h3>";</p>
-<p>String html_7 = "<form id='F1' action='ZAROVKAON'><input class='button' type='submit' value='Zapni zarovku' ></form><br>";</p>
-<p>String html_8 = "<form id='F2' action='ZAROVKAOFF'><input class='button' type='submit' value='Vypni zarovku' ></form><br>";</p>
-<p>String html_9 = "</div></body></html>";</p>
+<p>String header = " HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n";</p>
+<p>String html_1 = "< !DOCTYPE html><html><head>< t i t l e >Za< / t i t l e ></head><body><div id='main'>";</p>
+<p>String html_2 = "< p style=\"text-align: center\"> < h 2 >Priklad ovladani spotrebice.< / h 2 > < / p >";</p>
+<p>String html_6 = "< h 3 >Ovladani zarovky< / h 3>";</p>
+<p>String html_7 = "< f o r m id='F1' action='ZAROVKAON'><input class='button' type='submit' value='Zapni zarovku' ></form><br>";</p>
+<p>String html_8 = "< f o r m id='F2' action='ZAROVKAOFF'><input class='button' type='submit' value='Vypni zarovku' ></form><br>";</p>
+<p>String html_9 = "< /div></body></html>";</p>
 <p>// promenna pro cteni pozadavku na web server</p>
 <p>String request = "";</p>
 <p>// Zarovka je pripojena ke GPIO 13</p>
